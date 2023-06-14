@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,6 +22,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Lottie.asset(
+              'assets/lottie/waiting.json',
+              fit: BoxFit.contain,
+            ),
+            Lottie.network(
+                'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
             Row(
               children: [
                 InkWell(
@@ -72,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2015, 8),
+      firstDate: DateTime(1990, 1),
       lastDate: DateTime.now(),
     );
   }
