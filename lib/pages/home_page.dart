@@ -34,6 +34,9 @@ class _HomePageState extends State<HomePage> {
                   onTap: () async {
                     pickedDoB = await _selectDate(context);
                     if (pickedDoB != null) {
+                      print('object ${pickedDoB?.day}');
+                      print('object ${pickedDoB?.month}');
+                      print('object ${pickedDoB?.year}');
                       setState(() {});
                     }
                   },
@@ -55,6 +58,9 @@ class _HomePageState extends State<HomePage> {
                   onTap: () async {
                     pickedAgeAt = await _selectDate(context);
                     if (pickedAgeAt != null) {
+                      print('object ${pickedAgeAt?.day}');
+                      print('object ${pickedAgeAt?.month}');
+                      print('object ${pickedAgeAt?.year}');
                       setState(() {});
                     }
                   },
@@ -68,6 +74,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(pickedAgeAt != null ? pickedAgeAt.toString() : '')
               ],
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Calculate'),
             ),
           ],
         ),
