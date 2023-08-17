@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +9,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime? pickedDoB, pickedAgeAt;
+  String? o1;
+  String? o2;
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +23,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset(
-              'assets/lottie/waiting.json',
-              fit: BoxFit.contain,
-            ),
-            Lottie.network(
-                'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
             Row(
               children: [
                 InkWell(
                   onTap: () async {
                     pickedDoB = await _selectDate(context);
-                    if (pickedDoB != null) {
-                      print('object ${pickedDoB?.day}');
-                      print('object ${pickedDoB?.month}');
-                      print('object ${pickedDoB?.year}');
-                      setState(() {});
-                    }
+                    setState(() {});
                   },
                   child: const Text(
                     'Date of Birth: ',
@@ -57,12 +47,7 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () async {
                     pickedAgeAt = await _selectDate(context);
-                    if (pickedAgeAt != null) {
-                      print('object ${pickedAgeAt?.day}');
-                      print('object ${pickedAgeAt?.month}');
-                      print('object ${pickedAgeAt?.year}');
-                      setState(() {});
-                    }
+                    setState(() {});
                   },
                   child: const Text(
                     'Age at the Date of: ',
@@ -76,13 +61,43 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (pickedDoB != null && pickedAgeAt != null) {
+                  calculateAge(pickedAgeAt!, pickedDoB!);
+                }
+              },
               child: const Text('Calculate'),
             ),
+            Text(o1 ?? ''),
+            Text(o2 ?? ''),
           ],
         ),
       ),
     );
+  }
+
+  void calculateAge(DateTime dt1, DateTime dt2) {
+    Duration diff = dt1.difference(dt2);
+
+    o1 = '${diff.inDays} days';
+    o2 = '${diff.inHours} hours';
+
+    print('${diff.inDays ~/ 7} weeks');
+    print('${diff.inDays} days');
+    print('${diff.inHours} hours');
+
+    print("${diff.inMinutes} minutes");
+
+    print("${diff.inSeconds} seconds");
+    setState(() {});
+
+// 3 years 4 months 5 days
+// or 40 months 5 days
+// or 174 weeks 4 days
+// or 1,222 days
+// or 29,328 hours
+// or 1,759,680 minutes
+// or 105,580,800 seconds
   }
 
   Future<DateTime?> _selectDate(BuildContext context) async {
